@@ -98,3 +98,16 @@ La cobertura indica que lineas se ejecutaron durante las pruebas, pero no si las
 **Que aprendi?**
 
 Aprendi que una prueba en rojo es algo que nos da informacion y no un fracaso: los seis bugs aparecieron porque escribi pruebas para entradas limite como negativos, ceros y listas con valores distintos de cero. Tambien aprendi que la cobertura es una guia para saber que falta probar. En lo practico, aprendi el flujo de trabajo: hacer un fork, autenticarse con un token, escribir pruebas, corregir con commits pequenos y claros, medir y documentar todo dentro del mismo repositorio, no solo eso, tambien el manejo de los comandos, saber que hace cada uno y como hacerlo, tener una estructura y un orden para que no se vuelva un enredo hacer todas las pruebas, si bien la ia me ayudo en partes que me veia perdido tambien sirvio para entender como hacer ciertas cosas y que debo hacer en determinados casos
+
+## 6. Extras
+
+### Extra 1: pruebas de csv_parser.py con mocking
+
+Las funciones de csv_parser.py reciben el contenido como texto, por lo que el modulo no abre archivos. Aun asi se uso unittest.mock de dos formas: `patch` sobre `parse_csv_line` para probar `leer_csv_como_lista` de forma aislada, y `mock_open` para simular un archivo y pasar su contenido al parser, sin tocar el disco.
+
+### Extra 2: bugs corregidos en un modulo no obligatorio
+
+| # | Funcion | Entrada | Resultado erroneo | Resultado esperado | Correccion |
+|---|---------|---------|-------------------|--------------------|------------|
+| 7 | `csv_parser.parse_csv_line` | `"Perez, Juan",30` | `['"Perez', ' Juan"', '30']` | `['Perez, Juan', '30']` | Se reemplazo `split(',')` por `csv.reader` |
+| 8 | `csv_parser.csv_a_diccionarios` | cabecera `a,b,c` y fila `1,2` | `{'a': '1', 'b': '2'}` sin la clave `c` | `{'a': '1', 'b': '2', 'c': ''}` | Se recorren las cabeceras y se completa con cadena vacia |
