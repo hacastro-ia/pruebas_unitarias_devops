@@ -17,7 +17,8 @@ def celsius_a_kelvin(celsius):
 
 def kelvin_a_celsius(kelvin):
     """Convierte Kelvin a Celsius."""
-    # BUG 1: No valida que Kelvin sea >= 0 (absoluto)
+    if kelvin < 0:
+        raise ValueError("Kelvin no puede ser negativo")
     return kelvin - 273.15
 
 def metros_a_kilometros(metros):
