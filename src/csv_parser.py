@@ -11,12 +11,7 @@ def parse_csv_line(linea):
     if not linea:
         return []
 
-    # Manejar comillas
-    if '"' in linea:
-        # BUG 1: No maneja correctamente comillas anidadas o escapadas
-        return linea.split(',')
-
-    return linea.split(',')
+    return next(csv.reader(StringIO(linea)))
 
 def leer_csv_como_lista(contenido_csv):
     """Lee el contenido de un CSV y retorna una lista de listas."""
