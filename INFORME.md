@@ -72,7 +72,7 @@ src/__init__.py                0      0   100%
 src/autenticacion.py          42     42     0%   6-77
 src/calculadora.py            44      1    98%   22
 src/conversor.py              58      0   100%
-src/csv_parser.py             76     76     0%   6-127
+src/csv_parser.py             73      2    97%   59, 117
 src/descuentos.py             59      0   100%
 src/fibonacci.py              42     42     0%   6-73
 src/manipulador_texto.py      93     93     0%   6-156
@@ -80,14 +80,14 @@ src/procesador_texto.py       49     49     0%   6-84
 src/utils.py                  53     53     0%   6-92
 src/validador.py              64     64     0%   6-117
 --------------------------------------------------------
-TOTAL                        580    420    28%
+TOTAL                        577    346    40%
 </pre>
 
 Lectura de resultados:
 
-Los tres modulos trabajados (`calculadora.py`, `descuentos.py` y `conversor.py`) superan la meta del 85 % de cobertura: `calculadora.py` llega al 98 %, y `descuentos.py` y `conversor.py` al 100 %. Los demas modulos de `src/` aparecen en 0 % porque no formaron parte del taller, por lo que el total general (cercano al 28 %) no refleja el trabajo realizado: la meta se evalua solo sobre los modulos trabajados.
+En total el repositorio tiene 104 pruebas y todas pasan. Los cuatro modulos trabajados superan la meta del 85 % de cobertura: `calculadora.py` llega al 98 %, `csv_parser.py` al 97 %, y `descuentos.py` y `conversor.py` al 100 %. Los demas modulos de `src/` aparecen en 0 % porque no formaron parte del taller, por lo que el total general no refleja el trabajo realizado: la meta se evalua solo sobre los modulos trabajados.
 
-En `calculadora.py` solo queda sin cubrir la linea 22, el `return` de `dividir`, porque esa funcion solo se probo con el caso de error (division por cero) y no con una division valida. Es una limitacion conocida que se dejo documentada.
+En `calculadora.py` queda sin cubrir la linea 22, el `return` de `dividir`, porque esa funcion solo se probo con el caso de error (division por cero) y no con una division valida. En `csv_parser.py` quedan sin cubrir las lineas 59 y 117, que son comprobaciones de lista vacia que nunca se ejecutan, porque `split` siempre devuelve al menos un elemento.
 
 ## 5. Reflexion final
 
