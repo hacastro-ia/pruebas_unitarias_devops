@@ -81,3 +81,71 @@ def test_promedio_lista_simple():
     resultado = promedio(lista)
 
     assert resultado == 4
+
+
+def test_promedio_lista_vacia_lanza_error():
+    lista = []
+
+    with pytest.raises(ValueError):
+        promedio(lista)
+
+
+def test_maximo_lista_con_negativos():
+    lista = [-5, -2, -9]
+
+    resultado = maximo(lista)
+
+    assert resultado == -2
+
+
+def test_maximo_lista_simple():
+    lista = [4, 10, 7]
+
+    resultado = maximo(lista)
+
+    assert resultado == 10
+
+
+def test_maximo_lista_vacia_lanza_error():
+    lista = []
+
+    with pytest.raises(ValueError):
+        maximo(lista)
+
+
+def test_minimo_con_negativos():
+    lista = [3, -7, 5]
+
+    resultado = minimo(lista)
+
+    assert resultado == -7
+
+
+def test_calcular_area_rectangulo_valores_validos():
+    base, altura = 4, 5
+
+    resultado = calcular_area_rectangulo(base, altura)
+
+    assert resultado == 20
+
+
+def test_calcular_area_rectangulo_negativo_lanza_error():
+    base, altura = -4, 5
+
+    with pytest.raises(ValueError):
+        calcular_area_rectangulo(base, altura)
+
+
+def test_calcular_perimetro_rectangulo_valores_validos():
+    base, altura = 4, 5
+
+    resultado = calcular_perimetro_rectangulo(base, altura)
+
+    assert resultado == 18
+
+
+def test_calcular_perimetro_rectangulo_negativo_lanza_error():
+    base, altura = 4, -5
+
+    with pytest.raises(ValueError):
+        calcular_perimetro_rectangulo(base, altura)

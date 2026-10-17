@@ -157,3 +157,68 @@ def test_descuento_apilado_total_mayor_a_cien_da_cero():
     resultado = descuento_apilado(precio, descuentos)
 
     assert resultado == 0
+
+
+def test_calcular_descuento_precio_negativo_lanza_error():
+    precio, porcentaje = -10, 10
+
+    with pytest.raises(ValueError):
+        calcular_descuento(precio, porcentaje)
+
+
+def test_calcular_descuento_porcentaje_mayor_a_cien_lanza_error():
+    precio, porcentaje = 100, 150
+
+    with pytest.raises(ValueError):
+        calcular_descuento(precio, porcentaje)
+
+
+def test_calcular_precio_final_precio_negativo_lanza_error():
+    precio, impuesto, descuento = -100, 10, 10
+
+    with pytest.raises(ValueError):
+        calcular_precio_final(precio, impuesto, descuento)
+
+
+def test_calcular_precio_final_descuento_invalido_lanza_error():
+    precio, impuesto, descuento = 100, 10, 120
+
+    with pytest.raises(ValueError):
+        calcular_precio_final(precio, impuesto, descuento)
+
+
+def test_descuento_por_volumen_precio_unitario_negativo_lanza_error():
+    cantidad, precio_unitario = 5, -10
+
+    with pytest.raises(ValueError):
+        descuento_por_volumen(cantidad, precio_unitario)
+
+
+def test_descuento_por_volumen_cincuenta_unidades_quince_por_ciento():
+    cantidad, precio_unitario = 50, 10
+
+    resultado = descuento_por_volumen(cantidad, precio_unitario)
+
+    assert resultado == pytest.approx(425)
+
+
+def test_descuento_por_volumen_veinte_unidades_diez_por_ciento():
+    cantidad, precio_unitario = 20, 10
+
+    resultado = descuento_por_volumen(cantidad, precio_unitario)
+
+    assert resultado == pytest.approx(180)
+
+
+def test_descuento_cumulativo_precio_negativo_lanza_error():
+    precio, descuentos = -100, [10]
+
+    with pytest.raises(ValueError):
+        descuento_cumulativo(precio, descuentos)
+
+
+def test_descuento_apilado_precio_negativo_lanza_error():
+    precio, descuentos = -100, [10]
+
+    with pytest.raises(ValueError):
+        descuento_apilado(precio, descuentos)
