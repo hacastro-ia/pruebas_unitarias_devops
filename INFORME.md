@@ -111,3 +111,20 @@ Las funciones de csv_parser.py reciben el contenido como texto, por lo que el mo
 |---|---------|---------|-------------------|--------------------|------------|
 | 7 | `csv_parser.parse_csv_line` | `"Perez, Juan",30` | `['"Perez', ' Juan"', '30']` | `['Perez, Juan', '30']` | Se reemplazo `split(',')` por `csv.reader` |
 | 8 | `csv_parser.csv_a_diccionarios` | cabecera `a,b,c` y fila `1,2` | `{'a': '1', 'b': '2'}` sin la clave `c` | `{'a': '1', 'b': '2', 'c': ''}` | Se recorren las cabeceras y se completa con cadena vacia |
+
+## 6. Extras
+
+### Extra 1: pruebas de csv_parser.py con mocking
+
+Las funciones de csv_parser.py reciben el contenido como texto, por lo que el modulo no abre archivos. Aun asi se uso unittest.mock de dos formas: `patch` sobre `parse_csv_line` para probar `leer_csv_como_lista` de forma aislada, y `mock_open` para simular un archivo y pasar su contenido al parser, sin tocar el disco.
+
+### Extra 2: bugs corregidos en un modulo no obligatorio
+
+| # | Funcion | Entrada | Resultado erroneo | Resultado esperado | Correccion |
+|---|---------|---------|-------------------|--------------------|------------|
+| 7 | `csv_parser.parse_csv_line` | `"Perez, Juan",30` | `['"Perez', ' Juan"', '30']` | `['Perez, Juan', '30']` | Se reemplazo `split(',')` por `csv.reader` |
+| 8 | `csv_parser.csv_a_diccionarios` | cabecera `a,b,c` y fila `1,2` | `{'a': '1', 'b': '2'}` sin la clave `c` | `{'a': '1', 'b': '2', 'c': ''}` | Se recorren las cabeceras y se completa con cadena vacia |
+
+### Extra 3: GitHub Actions
+
+Se agrego el archivo `.github/workflows/tests.yml`, que ejecuta pytest con cobertura en cada push al repositorio.
